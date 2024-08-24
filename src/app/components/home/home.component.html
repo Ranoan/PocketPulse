@@ -1,0 +1,38 @@
+<form [formGroup]="form">
+    <div>
+        <mat-form-field floatLabel="auto">
+            <mat-label>Enter Amount...</mat-label>
+            <input matInput type="number" placeholder="0" formControlName="amount" required/>
+            <span matTextPrefix>$&nbsp;</span>
+        </mat-form-field>
+    </div>
+    <div *ngIf="amount!.valid">
+        <mat-form-field>
+            <input matInput [matDatepicker]="picker1" formControlName="date">
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="picker1"></mat-datepicker-toggle>
+            <mat-datepicker #picker1></mat-datepicker>
+        </mat-form-field>
+    </div>
+    <div *ngIf="amount!.valid">
+        <mat-form-field>
+            <mat-label>Note</mat-label>
+            <input matInput>
+          </mat-form-field>
+    </div>
+    <div *ngIf="amount!.valid">
+        <mat-slide-toggle formControlName="reccuring">Reccuring</mat-slide-toggle>
+        <button mat-raised-button>Done</button>
+    </div>
+    <div *ngIf="reccuring!.value">
+        <mat-form-field>
+            <mat-label>Every</mat-label>
+            <mat-select>
+              <mat-option *ngFor="let f of frequencies" [value]="f.value">
+                {{f.viewValue}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+    </div>
+</form>
+
